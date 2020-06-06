@@ -1,0 +1,55 @@
+---
+title: "Natural Disaster Impact in United States"
+author: "Zahiruddin Zahidanishah"
+date: "6/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern.
+
+This project involves exploring the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database. This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage.
+
+The events in the database start in the year 1950 and end in November 2011. In the earlier years of the database there are generally fewer events recorded, most likely due to a lack of good records. More recent years should be considered more complete.
+
+## Code Programming Setting
+The basic programming setting is used to ensure that all required packages to perform the code programming is installed at the beginning stage.
+```{r setting, echo=TRUE}
+library(knitr)
+library(markdown)
+library(rmarkdown)
+library(plyr)
+library(stats)
+```
+
+## Data Processing
+The first step of data processing is to setup the datasets in the programming. The numbers of rows and columns of the datasets are also identified at this stage.
+```{r, echo=TRUE}
+storm <- read.csv(file = "repdata-data-StormData.csv", header = TRUE, sep = ",")
+dim(storm)
+```
+Based on the above, there are 37 columns in the datasets and the names of each column are as follow:-
+```{r column_name, echo=TRUE}
+names(storm)
+```
+To get more understanding on the datasets, we need to identify the overall structure of the datasets and is shown below:-
+```{r datasets_structure, echo=TRUE}
+str(storm)
+```
+Based on the datasets structure, it can be concluded that the following variables that will be used for calculation in order to identify the affect of natural disaster in United States.
+
+The following are the main variables to be used:-
+
+1. EVTYPE: Event Type (Tornados, Flood, ….)
+2. FATALITIES: Number of Fatalities
+3. INJURIES: Number of Injuries
+4. PROGDMG: Property Damage
+5. PROPDMGEXP: Units for Property Damage (magnitudes - K,B,M)
+6. CROPDMG: Crop Damage
+7. CROPDMGEXP: Units for Crop Damage (magnitudes - K,BM,B)
+
