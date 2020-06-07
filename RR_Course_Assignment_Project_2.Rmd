@@ -5,6 +5,9 @@ date: "06/06/2020"
 output: html_document
 ---
 
+## Synopsis
+Natural disasters are unpredictable, deadly, and destructive. The sheer size and geographic diversity of the United States means that the country experiences a variety of different natural disasters on a frequent basis. This study is based on the data set from year 1950 to 2011. This study shows that the most fatality natural disaster in United States is tornado. Natural disaster also has caused major destructive damages and this study focused on two main damages, which are property damages and crop damages. Hopefully, this study will assist all stakeholder to take necessary action and precaution in reducing the number of damages caused by natural disaster to the overall population in United States.
+
 ## Introduction
 Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern.
 
@@ -60,78 +63,58 @@ stormdata$CROPDMGTOTAL <- (stormdata$CROPDMG * stormdata$CROPDMGEXP)/1000000000
 
 ## Observation No.1: The Impact of Natural Disaster Against Health Population in United States
 
-Based on the given data set, the following shows the top ten total number of fatalities cases based on the natural disaster events:-
+Based on the given data set, the following shows the top five (5) total number of fatalities cases based on the natural disaster events:-
 ```{r fatality, echo=FALSE}
 sumFatalities <- aggregate(FATALITIES ~ EVTYPE, data = stormdata,  FUN="sum")
-fatalities10events <- sumFatalities[order(-sumFatalities$FATALITIES), ][1:10, ]
-fatalities10events
+fatalitiesevents <- sumFatalities[order(-sumFatalities$FATALITIES), ][1:5, ]
+fatalitiesevents
 ```
 
-The following shows the barplot of the 10 most fatal cases of natural disaster in United States:-
+The following shows the barplot of the five (5) most fatal cases of natural disaster in United States:-
 ```{r fatal, echo=TRUE}
 par(mfrow = c(1,1), mar = c(12, 4, 3, 2), mgp = c(3, 1, 0), cex = 0.8)
-barplot(fatalities10events$FATALITIES, names.arg = fatalities10events$EVTYPE, las = 3, main = "Ten Highest Fatalities Cases", ylab = "Number of Fatalities")
+barplot(fatalitiesevents$FATALITIES, names.arg = fatalitiesevents$EVTYPE, las = 3, main = "Five Highest Fatalities Cases", ylab = "Number of Fatalities", col="red")
 ```
 
-```{r plot_1, echo=FALSE}
-dev.copy(png, "plot1_fatalities_cases.png", width = 480, height = 480)
-dev.off()
-```
-
-Based on the data set, the following shows the top ten total number of injury cases based on the type of natural disaster events in United States:-
+Based on the data set, the following shows the top five (5) total number of injury cases based on the type of natural disaster events in United States:-
 ```{r injury_1, echo=FALSE}
 sumInjuries <- aggregate(INJURIES ~ EVTYPE, data = stormdata,  FUN="sum")
-injuries10events <- sumInjuries[order(-sumInjuries$INJURIES), ][1:10, ]
-injuries10events
+injuriesevents <- sumInjuries[order(-sumInjuries$INJURIES), ][1:5, ]
+injuriesevents
 ```
 
-The following shows the barplot of the top ten injury cases based on natural disaster events in United States:-
+The following shows the barplot of the top five injury cases based on natural disaster events in United States:-
 ```{r injury_2, echo=FALSE}
 par(mfrow = c(1,1), mar = c(12, 6, 3, 2), mgp = c(4, 1, 0), cex = 0.8)
-barplot(injuries10events$INJURIES, names.arg = injuries10events$EVTYPE, las = 3, main = "Ten Highest Injuries Cases", ylab = "Number of Injuries")
+barplot(injuriesevents$INJURIES, names.arg = injuriesevents$EVTYPE, las = 3, main = "Five Highest Injuries Cases", ylab = "Number of Injuries", col="green")
 ```
 
-```{r plot_2, echo=FALSE}
-dev.copy(png, "plot2_injuries_cases.png", width = 480, height = 480)
-dev.off()
-```
+## Observation No.2: The Impact of Natural Disaster Against Economics Aspect in United States
 
-## The Impact of Natural Disaster Against Economics Aspect in United States
-
-Based on the data set, the following are the top ten high impact on the economic aspect based on the natural disaster events:-
+Based on the data set, the following are the top five (5) high impact on the economic aspect based on the natural disaster events:-
 ```{r economic, echo=FALSE}
 sumPropertyDamage <- aggregate(PROPDMGTOTAL ~ EVTYPE, data = stormdata,  FUN="sum")
-propdmg10Total <- sumPropertyDamage[order(-sumPropertyDamage$PROPDMGTOTAL), ][1:10, ]
-propdmg10Total
+propdmgTotal <- sumPropertyDamage[order(-sumPropertyDamage$PROPDMGTOTAL), ][1:5, ]
+propdmgTotal
 ```
 
-The following are the barplot showing the top ten high impact on the economic aspect based on the natural disaster events:-
+The following are the barplot showing the top five (5) high impact on the economic aspect based on the natural disaster events:-
 ```{r barplot, echo=TRUE}
 par(mfrow = c(1,1), mar = c(12, 6, 3, 2), mgp = c(3, 1, 0), cex = 0.8)
-barplot(propdmg10Total$PROPDMGTOTAL, names.arg = propdmg10Total$EVTYPE, las = 3, main = "Ten Highest Property Damages Cases", ylab = "Damage Property Values (in Billions)")
+barplot(propdmgTotal$PROPDMGTOTAL, names.arg = propdmgTotal$EVTYPE, las = 3, main = "Five Highest Property Damages Cases", ylab = "Damage Property Values (in Billions)", col="blue")
 ```
 
-```{r plot_3, echo=FALSE}
-dev.copy(png, "plot3_total_propdmg.png", width = 480, height = 480)
-dev.off()
-```
-
-The following shows the top ten natural disasters that causing the damages in crop events:-
+The following shows the top five (5) natural disasters that causing the damages in crop events:-
 ```{r crop, echo=FALSE}
 sumCropDamage <- aggregate(CROPDMGTOTAL ~ EVTYPE, data = stormdata,  FUN="sum")
-cropdmg10Total <- sumCropDamage[order(-sumCropDamage$CROPDMGTOTAL), ][1:10, ]
-cropdmg10Total
+cropdmgTotal <- sumCropDamage[order(-sumCropDamage$CROPDMGTOTAL), ][1:5, ]
+cropdmgTotal
 ```
 
-The following are the barplot showing the top ten natural disaster events that causing the damages in crop events:-
+The following are the barplot showing the top five (5) natural disaster events that causing the damages in crop events:-
 ```{r barplot_crop, echo=TRUE}
 par(mfrow = c(1,1), mar = c(10, 6, 3, 2), mgp = c(3, 1, 0), cex = 0.6)
-barplot(cropdmg10Total$CROPDMGTOTAL, names.arg = cropdmg10Total$EVTYPE, las = 2, main = "Ten Highest Crop Damages Cases", ylab = "Damage Crop Values (in Billions) ")
-```
-
-```{r plot_4, echo=FALSE}
-dev.copy(png, "plot4_total_cropdmg.png", width = 480, height = 480)
-dev.off()
+barplot(cropdmgTotal$CROPDMGTOTAL, names.arg = cropdmgTotal$EVTYPE, las = 2, main = "Five Highest Crop Damages Cases", ylab = "Damage Crop Values (in Billions)", col="yellow")
 ```
 
 ## Conclusion
@@ -140,12 +123,10 @@ The data set shows that the natural disaster events in the United States have ca
 
 Based on observation and finding in the data analysis against the types of natural disaster, it can be conclude that:-
 
-1. Tornado natural disaster has the most fatality cases.
+1. Tornado natural disaster has the most fatality and injury cases.
 
-2. Tornado natural disaster also has the most injury cases.
+2. Flood natural disaster has the most losses in property damages.
 
-3. Flood natural disaster has the most losses in property damages.
+3. Drought natural disaster has the most losses in crop damages.
 
-4. Drought natural disaster has the most losses in crop damages.
-
-In view of this findings, the government and all stakeholders shall take necessary action and precaution to reduced the negative impact in the future against the natural disaster. A further study is required to explore further on this issues.
+In view of this findings, the government and all stakeholders shall take necessary action and precaution to reduced the negative impact in the future against the natural disaster. A further study is required to explore in detail on this issues.
